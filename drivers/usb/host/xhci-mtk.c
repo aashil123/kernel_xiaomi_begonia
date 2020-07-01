@@ -881,7 +881,12 @@ static int xhci_mtk_remove(struct platform_device *dev)
 	struct xhci_hcd	*xhci = hcd_to_xhci(hcd);
 	struct usb_hcd  *shared_hcd = xhci->shared_hcd;
 
+<<<<<<< HEAD
 	xhci->xhc_state |= XHCI_STATE_REMOVING;
+=======
+	pm_runtime_put_noidle(&dev->dev);
+	pm_runtime_disable(&dev->dev);
+>>>>>>> b438d8e88c63... Merge 4.14.187 into android-4.14-q
 
 	usb_remove_hcd(shared_hcd);
 	xhci->shared_hcd = NULL;
@@ -897,8 +902,11 @@ static int xhci_mtk_remove(struct platform_device *dev)
 	xhci_mtk_sch_exit(mtk);
 	xhci_mtk_clks_disable(mtk);
 	xhci_mtk_ldos_disable(mtk);
+<<<<<<< HEAD
 	pm_runtime_put_noidle(&dev->dev);
 	pm_runtime_disable(&dev->dev);
+=======
+>>>>>>> b438d8e88c63... Merge 4.14.187 into android-4.14-q
 
 	return 0;
 }
